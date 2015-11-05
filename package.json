@@ -1,0 +1,27 @@
+{
+  "name": "learning-backbone",
+  "version": "0.0.1",
+  "description": "Demo code and reference to learn backbone rules",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexserver/learning-backbone.git"
+  },
+  "keywords": [
+    "backbone"
+  ],
+  "author": "Alejandro Gomez",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexserver/learning-backbone/issues"
+  },
+  "homepage": "https://github.com/alexserver/learning-backbone#readme",
+  "dependencies": {
+    "express": "^4.13.3",
+    "lodash": "^3.10.1",
+    "simple-object-query": "^1.2.1"
+  }
+}
