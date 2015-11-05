@@ -11,8 +11,9 @@ var app = express();
 var data = require('./data.json');
 var _ = require('lodash');
 var server;
+var path = require('path');
 
-app.use(express.static('./public'));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.get('/students', function(req, res) {
   res.json(data.student);

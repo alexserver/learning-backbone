@@ -1,6 +1,26 @@
 # learning-backbone
-Demo code to learn about backbone
+This is a demo project to learn backbone
 
-check the [reference](reference.md)
+It has 2 parts:
 
-check the [code](app/)
+1. The [reference](reference.md)
+2. The [code](app/)
+
+### How to run the app
+
+Download the repo
+```
+$ git clone git@github.com:alexserver/learning-backbone.git
+```
+
+Verify you have Node v0.12.x to v4.0.x
+
+Install packages
+```
+$ npm install
+```
+
+Run the app
+```
+$ npm run start
+```
