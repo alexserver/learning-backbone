@@ -10,10 +10,15 @@ var query = require('simple-object-query');
 var app = express();
 var data = require('./data.json');
 var _ = require('lodash');
+var parser = require('body-parser');
 var server;
 var path = require('path');
 
 app.use(express.static(path.join(__dirname, '/public')));
+
+// For parsing request bodies in POST
+app.use(parser.json());
+app.use(parser.urlencoded({ extended: true }));
 
 app.get('/students', function(req, res) {
   res.json(data.student);
