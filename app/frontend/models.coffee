@@ -7,8 +7,6 @@ class studentModel extends Backbone.Model
     name: "Unknown"
     age: null
 
-newId = null
-
 modelCreation = ->
   # Creating one student
   studentDemo = new studentModel
@@ -21,7 +19,25 @@ modelCreation = ->
   studentDemo.save {},
     success: (model, data) ->
       console.log "Model has been saved ", data
-      newId = data.id
+      modelDestroying data.id
+
+modelChanges = ->
+  # Creating one student
+  studentDemo = new studentModel
+    name: "Alex Server"
+    age: 33
+    sex: "M"
+    city: "Playa del Carmen"
+  # Adding listener to change
+  studentDemo.on 'change', (model) ->
+    console.log 'Model has changed, generic on.change'
+    console.log 'Model.name has changed!' if model.hasChanged 'title'
+    console.log 'Model changed attributes are ', model.changedAttributes()
+
+  # Firing the changes
+  studentDemo.set 'name', 'Alejandro Gomez'
+  studentDemo.set 'age', 34
+  studentDemo.set 'city', 'Toronto'
       
 
 modelFetchingExisting = ->
@@ -47,10 +63,10 @@ modelUpdating = ->
       studentDemo.set 'name', 'George from the Jungle'
       studentDemo.save()
 
-modelDestroying = ->
+modelDestroying = (newId) ->
   # Creating one student
   studentDemo = new studentModel
-    id: 4
+    id: newId
   # Adding listener to sync
   studentDemo.on 'sync', (model, data) ->
     console.log "Model has been synced for destroying", data
@@ -59,6 +75,6 @@ modelDestroying = ->
 
 ## MAIN processes
 modelCreation()
+modelChanges()
 modelFetchingExisting()
 modelUpdating()
-modelDestroying()

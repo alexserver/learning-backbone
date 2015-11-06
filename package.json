@@ -26,7 +26,8 @@
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "lodash": "^3.10.1",
-    "simple-object-query": "^1.2.1"
+    "simple-object-query": "^1.2.1",
+    "uuid": "^2.0.1"
   },
   "devDependencies": {
     "grunt-concurrent": "^2.0.4",

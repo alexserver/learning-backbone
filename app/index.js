@@ -13,6 +13,7 @@ var _ = require('lodash');
 var parser = require('body-parser');
 var server;
 var path = require('path');
+var db = require('./db');
 
 app.use(express.static(path.join(__dirname, '/public')));
 
@@ -22,55 +23,47 @@ app.use(parser.urlencoded({ extended: true }));
 
 // Show students
 app.get('/students', function(req, res) {
-  res.json(data.student);
+  var docs = db.getAll('students');
+  res.json(docs);
 });
 
 // View student
 app.get('/students/:id', function(req, res) {
-  var student = query.where(data.student, { id: parseInt(req.params.id) } );
-  if (student.length > 0) {
-    res.json(student[0]);
-  } else {
-    res.status(500).end();
-  }
+  var doc = db.getOne('student', {id: req.params.id});
+  res.json(doc);
 });
 
 // Create student
 app.post('/students', function(req, res) {
   //no validation since we're learning backbone, not API design, YOLO.
-  var student = req.body;
-  student.id = data.student.length + 1;
-  data.student.push(student);
-  res.status(201).json(student);
+  var doc = req.body;
+  doc = db.save('student', doc); //wth ??
+  res.status(201).json(doc);
 });
 
 // Update student
 app.put('/students/:id', function(req, res) {
   //no validation since we're learning backbone, not API design, YOLO.
-  var student = query.where(data.student, {id: parseInt(req.params.id)});
-  student = _.extend(student, req.body);
+  db.save('student', req.body);
   res.json({});
 });
 
+// Destroy student
 app.delete('/students/:id', function(req, res) {
   //no validation. YOLO
-  var student_id = _.findIndex(data.student, {id: parseInt(req.params.id)});
-  if (student_id) {
-    _.pullAt(data.student, student_id);
-    res.json({});
-  } else {
-    res.status(500);
-  }
+  db.del('student', {id: req.params.id});
+  res.json({});
 });
 
 // Show subjects
 app.get('/subjects', function(req, res) {
-  res.json(data.subject);
+  var docs = db.getAll('subjects');
+  res.json(docs);
 });
 
 // View subject
 app.get('/subjects/:id', function(req, res) {
-  var subject = query.where(data.subject, { id: parseInt(req.params.id) } );
+  var subject = query.where(data.subject, {id: parseInt(req.params.id)});
   if (subject.length > 0) {
     res.json(subject[0]);
   } else {
