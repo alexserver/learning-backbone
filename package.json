@@ -5,9 +5,7 @@
   "main": "api.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "coffee": "coffee --join app/public/app.js --compile app/frontend/*.coffee",
-    "start": "npm run coffee && node app/api",
-    "go": "grunt"
+    "start": "grunt"
   },
   "repository": {
     "type": "git",
