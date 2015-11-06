@@ -20,10 +20,12 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: true }));
 
+// Show students
 app.get('/students', function(req, res) {
   res.json(data.student);
 });
 
+// View student
 app.get('/students/:id', function(req, res) {
   var student = query.where(data.student, { id: parseInt(req.params.id) } );
   if (student.length > 0) {
@@ -33,6 +35,7 @@ app.get('/students/:id', function(req, res) {
   }
 });
 
+// Create student
 app.post('/students', function(req, res) {
   //no validation since we're learning backbone, not API design, YOLO.
   var student = req.body;
@@ -41,6 +44,7 @@ app.post('/students', function(req, res) {
   res.status(201).json(student);
 });
 
+// Update student
 app.put('/students/:id', function(req, res) {
   //no validation since we're learning backbone, not API design, YOLO.
   var student = query.where(data.student, {id: parseInt(req.params.id)});
@@ -48,10 +52,12 @@ app.put('/students/:id', function(req, res) {
   res.json({OK: true});
 });
 
+// Show subjects
 app.get('/subjects', function(req, res) {
   res.json(data.subject);
 });
 
+// View subject
 app.get('/subjects/:id', function(req, res) {
   var subject = query.where(data.subject, { id: parseInt(req.params.id) } );
   if (subject.length > 0) {
