@@ -7,20 +7,22 @@ class studentModel extends Backbone.Model
     name: "Unknown"
     age: null
 
+newId = null
+
 modelCreation = ->
   # Creating one student
   studentDemo = new studentModel
     name: "John New"
     age: 17
   # Sync listener, for when a request has been done to API
-  studentDemo.on 'sync', (model, resp) ->
-    console.log 'Model has been synced ', resp
-  # Change listener, for when an attribute has changed
-  studentDemo.on 'change', (model) ->
-    console.log 'Model changed data ', model
+  studentDemo.on 'sync', (model, data) ->
+    console.log 'Model has been synced for insertion', data
   # Inserting that student
-  console.log 'Save model', studentDemo.attributes
-  studentDemo.save()
+  studentDemo.save {},
+    success: (model, data) ->
+      console.log "Model has been saved ", data
+      newId = data.id
+      
 
 modelFetchingExisting = ->
   # Creating one student with existing id
@@ -36,7 +38,7 @@ modelUpdating = ->
     id: 4
   # Adding listener to sync
   studentDemo.on 'sync', (model)->
-    console.log "Model has been sync", @attributes
+    console.log "Model has been sync for fetching/updating", @attributes
   # Fetching data
   studentDemo.fetch
     success: (model, data)->
@@ -45,7 +47,18 @@ modelUpdating = ->
       studentDemo.set 'name', 'George from the Jungle'
       studentDemo.save()
 
+modelDestroying = ->
+  # Creating one student
+  studentDemo = new studentModel
+    id: 4
+  # Adding listener to sync
+  studentDemo.on 'sync', (model, data) ->
+    console.log "Model has been synced for destroying", data
+  # Deleting the model previously created
+  studentDemo.destroy()
+
 ## MAIN processes
 modelCreation()
 modelFetchingExisting()
 modelUpdating()
+modelDestroying()

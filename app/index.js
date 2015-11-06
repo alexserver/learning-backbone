@@ -49,7 +49,18 @@ app.put('/students/:id', function(req, res) {
   //no validation since we're learning backbone, not API design, YOLO.
   var student = query.where(data.student, {id: parseInt(req.params.id)});
   student = _.extend(student, req.body);
-  res.json({OK: true});
+  res.json({});
+});
+
+app.delete('/students/:id', function(req, res) {
+  //no validation. YOLO
+  var student_id = _.findIndex(data.student, {id: parseInt(req.params.id)});
+  if (student_id) {
+    _.pullAt(data.student, student_id);
+    res.json({});
+  } else {
+    res.status(500);
+  }
 });
 
 // Show subjects
