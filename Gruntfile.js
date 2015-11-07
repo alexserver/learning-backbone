@@ -5,7 +5,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          'app/public/app.js': ['app/frontend/*.coffee']
+          'app/public/app.js': ['app/source/*.coffee']
         }
       }
     },
@@ -13,13 +13,13 @@ module.exports = function(grunt) {
       dev: {
         script: 'app/index.js',
         options: {
-          ignore: ['app/frontend/**', 'app/public/**']
+          ignore: ['app/source/**', 'app/public/**']
         }
       }
     },
     watch: {
       scripts: {
-        files: 'app/frontend/*.coffee',
+        files: 'app/source/*.coffee',
         tasks: ['coffee'],
         options: {
           spawn: false
@@ -43,5 +43,5 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['coffee', 'concurrent']);
-
+  grunt.registerTask('test', ['coffee']);
 };
