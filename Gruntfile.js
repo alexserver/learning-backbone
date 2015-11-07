@@ -7,13 +7,21 @@ module.exports = function(grunt) {
         files: {
           'app/public/app.js': ['app/source/*.coffee']
         }
+      },
+      test: {
+        expand: true,
+        flatten: true,
+        cwd: 'spec/app',
+        src: ['**/*.coffee'],
+        dest: 'spec/app',
+        ext: '.js'
       }
     },
     nodemon: {
       dev: {
         script: 'app/index.js',
         options: {
-          ignore: ['app/source/**', 'app/public/**']
+          ignore: ['app/source/**', 'app/public/**', 'node_modules/**']
         }
       }
     },
