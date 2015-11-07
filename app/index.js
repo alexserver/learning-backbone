@@ -23,7 +23,7 @@ app.use(parser.urlencoded({ extended: true }));
 
 // Show students
 app.get('/students', function(req, res) {
-  var docs = db.getAll('students');
+  var docs = db.getAll('student');
   res.json(docs);
 });
 
