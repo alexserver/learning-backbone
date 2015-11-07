@@ -31,7 +31,8 @@ modelChanges = ->
   # Adding listener to change
   studentDemo.on 'change', (model) ->
     console.log 'Model has changed, generic on.change'
-    console.log 'Model.name has changed!' if model.hasChanged 'title'
+    console.log 'Model Name has changed!' if model.hasChanged 'name'
+    console.log "Model previous name was #{model.previous('name')}" if model.hasChanged 'name'
     console.log 'Model changed attributes are ', model.changedAttributes()
 
   # Firing the changes
